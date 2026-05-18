@@ -1,0 +1,39 @@
+global:
+  scrape_interval: 15s
+
+
+
+# =========================================
+# ALERT RULES
+# =========================================
+rule_files:
+  - "alerts.yml"
+
+
+
+# =========================================
+# ALERTMANAGER
+# =========================================
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+
+
+
+# =========================================
+# TARGETS
+# =========================================
+scrape_configs:
+
+  # Linux metrics
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+
+  # Docker metrics
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
