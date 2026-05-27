@@ -91,7 +91,7 @@ services:
   # Хранилище логов
   # =========================================
   loki:
-    image: grafana/loki:latest
+    image: grafana/loki:2.9.8
     container_name: loki
 
     restart: unless-stopped
