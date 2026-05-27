@@ -3,17 +3,8 @@ groups:
 
     rules:
 
-      # =========================================
-      # HIGH CPU
-      # =========================================
       - alert: HighCPUUsage
-
-        expr: 100 - (
-          avg by(instance)(
-            irate(node_cpu_seconds_total{mode="idle"}[5m])
-          ) * 100
-        ) > 80
-
+        expr: 100 - (avg by(instance)(irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
         for: 1m
 
         labels:
@@ -22,21 +13,8 @@ groups:
         annotations:
           summary: "High CPU Usage"
 
-
-
-      # =========================================
-      # HIGH MEMORY
-      # =========================================
       - alert: HighMemoryUsage
-
-        expr: (
-          1 - (
-            node_memory_MemAvailable_bytes
-            /
-            node_memory_MemTotal_bytes
-          )
-        ) * 100 > 80
-
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 80
         for: 1m
 
         labels:
