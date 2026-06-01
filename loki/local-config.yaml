@@ -6,6 +6,17 @@ server:
 common:
   path_prefix: /tmp/loki
 
+  storage:
+    filesystem:
+      chunks_directory: /tmp/loki/chunks
+      rules_directory: /tmp/loki/rules
+
+  replication_factor: 1
+
+  ring:
+    kvstore:
+      store: inmemory
+
 schema_config:
   configs:
     - from: 2020-10-24
@@ -24,3 +35,6 @@ storage_config:
 
   filesystem:
     directory: /tmp/loki/chunks
+
+analytics:
+  reporting_enabled: false
